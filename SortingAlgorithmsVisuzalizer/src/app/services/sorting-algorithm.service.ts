@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export abstract class SortingAlgorithmService {
+  public abstract sort(array: number[]): void;
 
-  constructor() { }
-
-  public abstract sort(): void;
+  public getArray(size: number) {
+    return Array.from({ length: size }, () => Math.floor(Math.random() * 10));
+  }
 }

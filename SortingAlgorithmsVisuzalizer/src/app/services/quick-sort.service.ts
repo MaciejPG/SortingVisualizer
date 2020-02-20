@@ -23,7 +23,7 @@ export class QuickSortService extends SortingAlgorithmService {
   private partition(array: number[], low: number, high: number): number {
     let i = low - 1;
 
-    for (let j = low; j < high - 1; j++) {
+    for (let j = low; j < high; j++) {
       if (array[j] < array[high]) {
         i++;
 
