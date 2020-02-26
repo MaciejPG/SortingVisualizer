@@ -15,7 +15,7 @@ import { trigger, state, style } from '@angular/animations';
       state('notSelected', style({
         backgroundColor: 'gray'
       })),
-      state('pivot', style({
+      state('highest', style({
         backgroundColor: 'blue'
       })),
 

@@ -7,7 +7,6 @@ import { SortingItem } from '../models/sorting-item';
 export abstract class SortingAlgorithmService {
   protected selectedState = 'selected';
   protected notSelectedState = 'notSelected';
-  protected pivotState = 'pivot';
 
   private delay: number;
 

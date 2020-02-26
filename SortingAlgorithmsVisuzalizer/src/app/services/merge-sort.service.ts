@@ -6,6 +6,7 @@ import { SortingItem } from '../models/sorting-item';
   providedIn: 'root'
 })
 export class MergeSortService extends SortingAlgorithmService {
+  private highest = 'highest';
 
   public sort(array: SortingItem[]): void {
     this.mergeSort(array, 0, array.length - 1);
@@ -29,7 +30,7 @@ export class MergeSortService extends SortingAlgorithmService {
     const leftArrayLimit = m - l + 1;
     const rightArrayLimit = r - m;
 
-    array[r].state = this.pivotState;
+    array[r].state = this.highest;
 
     const lArray: SortingItem[] = new Array<SortingItem>(leftArrayLimit);
     const rArray: SortingItem[] = new Array<SortingItem>(rightArrayLimit);

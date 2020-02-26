@@ -6,6 +6,7 @@ import { SortingAlgorithmService } from './sorting-algorithm.service';
   providedIn: 'root'
 })
 export class QuickSortService extends SortingAlgorithmService {
+  private pivotState = 'pivot';
   public sort(array: SortingItem[]) {
     this.quickSort(array, 0, array.length - 1);
   }
