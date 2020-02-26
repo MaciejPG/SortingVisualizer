@@ -13,7 +13,7 @@ export class QuickSortService extends SortingAlgorithmService {
   private async quickSort(array: SortingItem[], low: number, high: number) {
     if (low < high) {
       const pivotIndex = await this.partition(array, low, high);
-      //Promise.all([]);
+      // Promise.all([]);
       await this.quickSort(array, low, pivotIndex - 1);
       await this.quickSort(array, pivotIndex + 1, high);
     }
