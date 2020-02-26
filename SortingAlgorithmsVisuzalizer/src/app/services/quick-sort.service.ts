@@ -6,22 +6,22 @@ import { SortingAlgorithmService } from './sorting-algorithm.service';
   providedIn: 'root'
 })
 export class QuickSortService extends SortingAlgorithmService {
-  public sort(array: SortingItem[], delay: number) {
-    this.quickSort(array, 0, array.length - 1, delay, 0);
+  public sort(array: SortingItem[]) {
+    this.quickSort(array, 0, array.length - 1);
   }
 
-  private async quickSort(array: SortingItem[], low: number, high: number, delay: number, iteration: number) {
+  private async quickSort(array: SortingItem[], low: number, high: number) {
     if (low < high) {
-      const pivotIndex = await this.partition(array, low, high, delay);
+      const pivotIndex = await this.partition(array, low, high);
       //Promise.all([]);
-      await this.quickSort(array, low, pivotIndex - 1, delay, iteration);
-      await this.quickSort(array, pivotIndex + 1, high, delay, iteration);
+      await this.quickSort(array, low, pivotIndex - 1);
+      await this.quickSort(array, pivotIndex + 1, high);
     }
   }
 
-  private async partition(array: SortingItem[], low: number, high: number, delay: number) {
+  private async partition(array: SortingItem[], low: number, high: number) {
     let i = low - 1;
-    array[high].state = 'pivot';
+    array[high].state = this.pivotState;
 
     for (let j = low; j < high; j++) {
       if (array[j].value < array[high].value) {
@@ -32,16 +32,16 @@ export class QuickSortService extends SortingAlgorithmService {
         array[j] = temp;
 
         if (j < high) {
-          array[j].state = 'selected';
-          await this.timeout(delay);
-          array[j].state = 'notSelected';
+          array[j].state = this.selectedState;
+          await this.timeout();
+          array[j].state = this.notSelectedState;
         }
       }
     }
     const temp1 = array[i + 1];
 
-    await this.timeout(delay);
-    array[high].state = 'notSelected'; // array[i+1] is equal to previous array[high]
+    await this.timeout();
+    array[high].state = this.notSelectedState; // array[i+1] is equal to previous array[high]
     array[i + 1] = array[high];
     array[high] = temp1;
     return i + 1;

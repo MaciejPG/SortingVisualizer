@@ -28,25 +28,29 @@ import {
         backgroundColor: 'blue'
       })),
 
-      transition('notSelected => selected', animate('60ms')),
-      transition('notSelected => pivot', animate('60ms')),
-      transition('pivot => notSelected', animate('60ms')),
-      transition('selected => notSelected', animate('60ms')),
+      // transition('notSelected => selected', animate('600ms')),
+      // transition('notSelected => pivot', animate('600ms')),
+      // transition('pivot => notSelected', animate('600ms')),
+      // transition('selected => notSelected', animate('600ms')),
       ])
   ]
 })
 export class VisuzalizationComponent implements OnInit {
   public array: SortingItem[];
-  public delay = 100;
+  public delay = 10;
   private TEMP_CONSTANT_ARRAY_SIZE = 200;
+  private TEMP_MULIPLTIER = 500;
 
   constructor(private algorithmService: QuickSortService) { }
 
   public ngOnInit(): void {
-    this.array = this.algorithmService.getArray(this.TEMP_CONSTANT_ARRAY_SIZE);
+    this.array = this.algorithmService.getArray(
+      this.TEMP_CONSTANT_ARRAY_SIZE,
+      this.TEMP_MULIPLTIER);
   }
 
   public run() {
-    this.algorithmService.sort(this.array, this.delay);
+    this.algorithmService.setDelay(this.delay);
+    this.algorithmService.sort(this.array);
   }
 }

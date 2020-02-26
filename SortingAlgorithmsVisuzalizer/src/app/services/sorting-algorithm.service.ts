@@ -5,18 +5,28 @@ import { SortingItem } from '../models/sorting-item';
   providedIn: 'root'
 })
 export abstract class SortingAlgorithmService {
-  public abstract sort(array: SortingItem[], delay: number): void;
+  protected selectedState = 'selected';
+  protected notSelectedState = 'notSelected';
+  protected pivotState = 'pivot';
 
-  public getArray(size: number) {
+  private delay: number;
+
+  public abstract sort(array: SortingItem[]): void;
+
+  public getArray(size: number, multiplier: number) {
     const array = [];
     for (let i = 0; i < size; i++) {
-      array.push({ state: 'notSelected', value: Math.floor(Math.random() * 10) });
+      array.push({ state: this.notSelectedState, value: Math.floor(Math.random() * multiplier) });
     }
 
     return array;
   }
 
-  protected timeout(delay: number) {
-    return new Promise(resolve => setTimeout(resolve, delay));
+  public setDelay(delay: number) {
+    this.delay = delay;
+  }
+
+  protected timeout() {
+    return new Promise(resolve => setTimeout(resolve, this.delay ?? 100));
   }
 }
