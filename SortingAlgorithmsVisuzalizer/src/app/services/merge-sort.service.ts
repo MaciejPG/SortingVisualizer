@@ -1,34 +1,38 @@
 import { Injectable } from '@angular/core';
-import { race } from 'rxjs';
 import { SortingAlgorithmService } from './sorting-algorithm.service';
+import { SortingItem } from '../models/sorting-item';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MergeSortService extends SortingAlgorithmService {
 
-  public sort(array: number[]): void {
-    this.mergeSort(array, 0, array.length - 1);
+  public sort(array: SortingItem[], delay: number): void {
+    this.mergeSort(array, 0, array.length - 1, delay);
   }
 
-  private mergeSort(array: number[], l: number, r: number) {
+  private async mergeSort(array: SortingItem[], l: number, r: number, delay: number) {
     if (l < r) {
       const roundedHalf = Math.floor((r + l) / 2);
-      this.mergeSort(array, l, roundedHalf);
-      this.mergeSort(array, roundedHalf + 1, r);
-      this.merge(array, l, roundedHalf, r);
+      // await Promise.all([this.mergeSort(array, l, roundedHalf, delay),
+      //   this.mergeSort(array, roundedHalf + 1, r, delay)]);
+      await this.mergeSort(array, l, roundedHalf, delay);
+      await this.mergeSort(array, roundedHalf + 1, r, delay);
+      await this.merge(array, l, roundedHalf, r, delay);
     }
   }
 
-  public merge(array: number[], l: number, m: number, r: number) {
+  public async merge(array: SortingItem[], l: number, m: number, r: number, delay) {
     let leftArrayIndex = 0;
     let rightArrayIndex = 0;
     let k = l;
     const leftArrayLimit = m - l + 1;
     const rightArrayLimit = r - m;
 
-    const lArray: number[] = new Array<number>(leftArrayLimit);
-    const rArray: number[] = new Array<number>(rightArrayLimit);
+    array[r].state = 'pivot';
+
+    const lArray: SortingItem[] = new Array<SortingItem>(leftArrayLimit);
+    const rArray: SortingItem[] = new Array<SortingItem>(rightArrayLimit);
 
     for (let i = 0; i < leftArrayLimit; i++) {
       lArray[i] = array[l + i];
@@ -39,26 +43,41 @@ export class MergeSortService extends SortingAlgorithmService {
     }
 
     while (leftArrayIndex < leftArrayLimit && rightArrayIndex < rightArrayLimit) {
-      if (lArray[leftArrayIndex] < rArray[rightArrayIndex]) {
+      if (lArray[leftArrayIndex].value < rArray[rightArrayIndex].value) {
+        await this.timeout(delay);
         array[k] = lArray[leftArrayIndex];
+        await this.highlight(array[k], delay);
         leftArrayIndex++;
       } else {
+        await this.timeout(delay);
         array[k] = rArray[rightArrayIndex];
+        await this.highlight(array[k], delay);
         rightArrayIndex++;
       }
       k++;
     }
-
     while (leftArrayIndex < leftArrayLimit) {
+      await this.timeout(delay);
       array[k] = lArray[leftArrayIndex];
+      await this.highlight(array[k], delay);
       leftArrayIndex++;
       k++;
     }
 
     while (rightArrayIndex < rightArrayLimit) {
+      await this.timeout(delay);
       array[k] = rArray[rightArrayIndex];
+      await this.highlight(array[k], delay);
       rightArrayIndex++;
       k++;
     }
+
+    array[r].state = 'notSelected';
+  }
+
+  private async highlight(item: SortingItem, delay: number) {
+    item.state = 'selected';
+    await this.timeout(delay);
+    item.state = 'notSelected';
   }
 }
