@@ -10,15 +10,15 @@ import { SortingAlgorithmService } from 'src/app/services/sorting-algorithm.serv
 export class VisuzalizationComponent implements OnInit {
   public array: SortingItem[];
   public delay = 10;
-  private TEMP_CONSTANT_ARRAY_SIZE = 200;
-  private TEMP_MULIPLTIER = 500;
+  public TEMP_CONSTANT_ARRAY_SIZE = 200;
+  public TEMP_MULIPLIER = 500;
 
   constructor(protected algorithmService: SortingAlgorithmService) { }
 
   public ngOnInit(): void {
     this.array = this.algorithmService.getArray(
       this.TEMP_CONSTANT_ARRAY_SIZE,
-      this.TEMP_MULIPLTIER);
+      this.TEMP_MULIPLIER);
   }
 
   public run() {
