@@ -1,4 +1,9 @@
-<button type="button" (click)="run()">Sort</button>
-<div *ngFor="let number of array">
-  <div [style.height.px]="800/array.length" [style.width.px]="(1 + number.value) * 500 / TEMP_MULIPLIER" [@isSelected]="number.state">{{number.value}}</div>
+<div class="settings">
+  <button type="button" (click)="run()">Sort</button>
+</div>
+<div class="display-area">
+  <div *ngFor="let number of array">
+    <div [style.height.px]="800/array.length" [style.width.px]="(1 + number.value) * 500 / TEMP_MULIPLIER"
+      [@isSelected]="number.state">{{''}}</div>
+  </div>
 </div>
