@@ -10,19 +10,19 @@ import { trigger, style, state } from '@angular/animations';
   animations: [
     trigger('isSelected',
       [state('selected', style({
-        backgroundColor: 'green'
+        backgroundColor: 'orange'
       })),
       state('notSelected', style({
-        backgroundColor: 'gray'
+        backgroundColor: 'rgb(87, 125, 168)'
       })),
       state('pivot', style({
-        backgroundColor: 'blue'
+        backgroundColor: 'red'
       })),
 
-      // transition('notSelected => selected', animate('600ms')),
-      // transition('notSelected => pivot', animate('600ms')),
-      // transition('pivot => notSelected', animate('600ms')),
-      // transition('selected => notSelected', animate('600ms')),
+        // transition('notSelected => selected', animate('600ms')),
+        // transition('notSelected => pivot', animate('600ms')),
+        // transition('pivot => notSelected', animate('600ms')),
+        // transition('selected => notSelected', animate('600ms')),
       ])
   ]
 })

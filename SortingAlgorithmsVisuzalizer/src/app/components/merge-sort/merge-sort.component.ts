@@ -10,13 +10,13 @@ import { trigger, state, style } from '@angular/animations';
   animations: [
     trigger('isSelected',
       [state('selected', style({
-        backgroundColor: 'green'
+        backgroundColor: 'orange'
       })),
       state('notSelected', style({
-        backgroundColor: 'gray'
+        backgroundColor: 'rgb(87, 125, 168)'
       })),
       state('highest', style({
-        backgroundColor: 'blue'
+        backgroundColor: 'red'
       })),
 
       // transition('notSelected => selected', animate('600ms')),

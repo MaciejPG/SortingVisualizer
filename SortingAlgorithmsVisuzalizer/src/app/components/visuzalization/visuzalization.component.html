@@ -1,9 +1,21 @@
-<div class="settings">
-  <button type="button" (click)="run()">Sort</button>
+<div>
+  <ul>
+    <li><button type="button" (click)="run()">Sort</button></li>
+    <li>
+      <p>Set array size: </p>
+      <input type="range" #ref [value]="INITIAL_ARRAY_SIZE" min="50" max="500" step="1" #ref
+        (change)="getNewRandomArray(ref.value)">
+    </li>
+    <li>
+      <p>Set speed: </p>
+      <input type="range" [value]="-1 * delay" min="-200" max="-10" step="-1" #delayRef (change)="setDelay(delayRef.value)">
+    </li>
+  </ul>
+
 </div>
 <div class="display-area">
   <div *ngFor="let number of array">
-    <div [style.height.px]="800/array.length" [style.width.px]="(1 + number.value) * 500 / TEMP_MULIPLIER"
-      [@isSelected]="number.state">{{''}}</div>
+    <div class="item" [style.height.px]="800/array.length" [style.width.px]="(1 + number.value)" [@isSelected]="number.state">{{''}}
+    </div>
   </div>
 </div>

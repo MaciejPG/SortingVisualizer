@@ -1,20 +1,55 @@
 div.display-area {
-  background-color: rgb(216, 216, 216);
-  margin-top: 10px;
+  background-color: rgb(179, 179, 180);
 }
 
-
-div.settings {
-  background-color: gold;
-  height: 25px;
+div.item {
+  border-radius: 8px;
 }
 
-button {
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(100, 100, 100);
+}
+
+li {
+  float: left;
+}
+
+li button {
   text-align: center;
-  display: inline;
+  display: block;
   text-decoration: none;
   border: none;
   cursor: pointer;
   padding: 5px 10px;
+  outline: none;
+}
+
+li button:hover {
+  background-color: rgb(160, 160, 160);
+  outline: none;
+}
+
+li input[type=range] {
+  margin-top: 2px;
+  height: 8px;
+  width: 80px;
+  background-color: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  box-shadow: 1px 1px 1px #000000;
+}
+
+p {
+  margin-left: 10px;
+  display: inline;
+  color: white;
+}
+
+
+input:focus {
   outline: none;
 }
